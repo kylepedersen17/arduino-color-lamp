@@ -52,6 +52,10 @@ void loop() {
       analogWrite(bluePin, 0); //write 100 (brightness) to blue pin
       onStatus = true;
     } 
+
+    if (onStatus) {
+      analogWrite(redPin, brightness);
+    }
   
   delay(400);
 }
