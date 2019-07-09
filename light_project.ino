@@ -6,6 +6,7 @@ int redPin=10;  //set red LED pin to 11
 int greenPin=9; //set green LED pin to 10
 int bluePin=5; //set blue LED pin to 6
 int brightness=100; //Set brightness to 100
+boolean onStatus = false;
 
 void setup() {
   Serial.begin(9600);
@@ -17,27 +18,34 @@ void setup() {
 }
 
 void loop() {
-  analogWrite(redPin, brightness); //turn off red pin
-  analogWrite(greenPin, 0); //turn off green pin
-  analogWrite(bluePin, 0); //write 100 (brightness) to blue pin
-  
-  digitalWrite(trigPin, LOW);
-  delay(2);
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
+    // potentiometer
+    digitalWrite(trigPin, LOW);
+    delay(2);
+    digitalWrite(trigPin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPin, LOW);
 
+    // getting signal from potentiometer
+    signal = pulseIn(echoPin, HIGH); //measure ping time in microseconds
+    int newSignal = (int) signal;
+    Serial.println(newSignal);
 
-  signal = pulseIn(echoPin, HIGH); //measure ping time in microseconds
-  
-  int newSignal = (int) signal;
-  Serial.println(newSignal);
-  
-  if (newSignal < 500) {
-    analogWrite(redPin, 0); 
-    analogWrite(greenPin, 0); 
-    analogWrite(bluePin, 0); 
-  }
+    
+    //decide whether or not to turn on light
+    if (newSignal < 500 && onStatus) { 
+      analogWrite(redPin, 0); //turn off red pin
+      analogWrite(greenPin, 0); //turn off green pin
+      analogWrite(bluePin, 0); //write 100 (brightness) to blue pin
+      onStatus = false;   
+    }
+    else if (newSignal < 500) {
+      Serial.println("HI");    
+      onStatus = true;
+      analogWrite(redPin, brightness); //turn off red pin
+      analogWrite(greenPin, 0); //turn off green pin
+      analogWrite(bluePin, 0); //write 100 (brightness) to blue pin
+    } 
+   
 
-  delay(4000);
+  delay(400);
 }
