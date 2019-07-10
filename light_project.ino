@@ -6,9 +6,9 @@ int potPin=A0; //assign potentiometer pin to A0
 int readValue; //declare potentiometer readValue variable
 float brightness;
 
-int redPin=10;  //set red LED pin to 11
-int greenPin=9; //set green LED pin to 10
-int bluePin=5; //set blue LED pin to 6
+int redPin=9;  //set red LED pin to 11
+int greenPin=11; //set green LED pin to 10
+int bluePin=10; //set blue LED pin to 6
 boolean onStatus = false;
 
 void setup() {
@@ -53,7 +53,7 @@ void loop() {
       onStatus = true;
     } 
 
-    if (onStatus) {
+    if (onStatus) { //use serial disrupt in future for smoother function
       analogWrite(redPin, brightness);
     }
   
