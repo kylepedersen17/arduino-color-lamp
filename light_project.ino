@@ -10,9 +10,14 @@ int readValue;
 
 // RBG color variables
 int i = 0; // color index counter
-int reds[]   = {255, 0, 0, 255,};
-int greens[] = {0, 0, 255, 0, 255};
-int blues[]  = {0, 255, 255, 255}; //red, blue, cyan, magenta
+//int reds[]   = {255, 0, 255};
+//int greens[] = {0, 0, 255};
+//int blues[]  = {0, 255, 255}; //red, blue, cyan, magenta
+
+int reds[]   = {255, 0, 255};
+int greens[] = {0, 0, 255};
+int blues[]  = {0, 255, 255}; //red, blue, cyan, magenta
+
 float brightnessRed = reds[i];
 float brightnessBlue = greens[i];
 float brightnessGreen = blues[i];
